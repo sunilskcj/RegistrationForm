@@ -1,0 +1,47 @@
+<div class="bg">
+    <form [formGroup]="RegistrationForm" (ngSubmit)="submit()">
+        <div>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" formControlName="name"><br><br>
+
+            <div [hidden]="RegistrationForm.controls['name'].valid || RegistrationForm.controls['name'].pristine  ">
+                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['name'].errors?.['required']">
+                    Name should be entered
+                </div>
+            </div>
+        </div>
+
+
+
+        <label for="uname">User Name:</label><br>
+        <input type="text" id="uname" name="uname" formControlName="uname"><br><br>
+
+
+        <div>
+            <label for="fname">Password:</label><br>
+            <input type="password" id="fname" name="psw" formControlName="psw"><br><br>
+        
+            <div [hidden]="RegistrationForm.controls['psw'].valid || RegistrationForm.controls['psw'].pristine  ">
+                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['required']">
+                Password should be entered
+                </div>
+                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['minlength']  ">
+                    Password should be between 6 & 12 , your actual length is {{RegistrationForm.controls['psw'].errors?.['minlength'].actualLength}} 
+                </div>
+
+                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['maxlength']  ">
+                    Password should be between 6 & 12 , your actual length is {{RegistrationForm.controls['psw'].errors?.['maxlength'].actualLength}} 
+                </div>
+            </div>
+        </div>
+
+
+        <label for="rps">Password:</label><br>
+        <input type="password" id="rps" name="rps" formControlName="rpsw"><br><br>
+
+        <label for="num">Mobile No:</label><br>
+        <input type="text" id="fname" name="fname" formControlName="num"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
