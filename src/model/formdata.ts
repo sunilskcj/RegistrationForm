@@ -1,3 +1,7 @@
-export class RegFormData{
-    constructor(public name:string, public uName: string,public password :string,public repassword: string,public number:string ){}
+export class RegFormData {
+    constructor(public name: string,
+        public uname: string,
+        public psw: string,
+        public rpsw: string
+        , public num: string) { }
 }

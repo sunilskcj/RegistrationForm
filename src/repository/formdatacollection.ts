@@ -1,3 +1,3 @@
 import { RegFormData } from "src/model/formdata"
 
-export const regColection : RegFormData[] = []
+export const RegFormDataCollection : RegFormData[] = []
