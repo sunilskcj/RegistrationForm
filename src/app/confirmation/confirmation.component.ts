@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { RegFormData } from 'src/model/formdata';
 
 @Component({
   selector: 'app-confirmation',
@@ -9,6 +10,7 @@ export class ConfirmationComponent implements OnInit {
 
   constructor() { }
 
+  @Input() fData : RegFormData | undefined
   ngOnInit(): void {
   }
 
