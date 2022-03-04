@@ -1,7 +1,11 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output , EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormValidator } from 'src/custom-validators/loginformvalidators';
+import { ConPass } from 'src/custom-validators/password-validation';
 import { RegFormData } from 'src/model/formdata';
-import { EventEmitter } from 'stream';
+
+
+
 
 
 @Component({
@@ -12,9 +16,7 @@ import { EventEmitter } from 'stream';
 export class RegistrationComponent implements OnInit {
 
 
-
-  @Output () formdata : EventEmitter<RegFormData> = new EventEmitter<RegFormData>() ;
-
+  @Output() credentials = new EventEmitter<RegFormData>();
 
   RegistrationForm: FormGroup = this._rg.group({
     name: [
@@ -24,16 +26,25 @@ export class RegistrationComponent implements OnInit {
     uname: ["", [Validators.required]],
     psw: ["",
       [Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(12)
+      FormValidator.Length,
+      FormValidator._isLowerC,
+      FormValidator._isUpperC,
+      FormValidator._isdigit,
+      FormValidator._isSpecialC
+      
     ]
     ],
     rpsw: ["",
     [Validators.required,
-    Validators.minLength(6),
-    Validators.maxLength(12)]
+      FormValidator.Length,
+      FormValidator._isLowerC,
+      FormValidator._isUpperC,
+      FormValidator._isdigit,
+      FormValidator._isSpecialC
+      
+    ]
   ],
-    num: ["", [Validators.required]]
+    num: ["", [Validators.required,FormValidator._isC]]
   })
 
 
@@ -43,8 +54,9 @@ export class RegistrationComponent implements OnInit {
   constructor(private _rg: FormBuilder) { }
 
   submit(){
-    console.log(this.RegistrationForm);
-    
+   console.log(this.RegistrationForm.value);
+   
+    this.credentials.emit( this.RegistrationForm.value);
   }
 
 }

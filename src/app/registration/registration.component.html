@@ -12,10 +12,15 @@
         </div>
 
 
-
+<div>
         <label for="uname">User Name:</label><br>
         <input type="text" id="uname" name="uname" formControlName="uname"><br><br>
-
+        <div [hidden]="RegistrationForm.controls['uname'].valid || RegistrationForm.controls['uname'].pristine  ">
+            <div class="alert alert-danger" *ngIf="RegistrationForm.controls['uname'].errors?.['required']">
+                User Name should be entered
+            </div>
+        </div>
+    </div>
 
         <div>
             <label for="fname">Password:</label><br>
@@ -25,23 +30,55 @@
                 <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['required']">
                 Password should be entered
                 </div>
-                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['minlength']  ">
-                    Password should be between 6 & 12 , your actual length is {{RegistrationForm.controls['psw'].errors?.['minlength'].actualLength}} 
+                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['lengtherror']  ">
+                     {{RegistrationForm.controls['psw'].errors?.['lengtherror'].message}} 
                 </div>
-
-                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['maxlength']  ">
-                    Password should be between 6 & 12 , your actual length is {{RegistrationForm.controls['psw'].errors?.['maxlength'].actualLength}} 
-                </div>
+                <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['noDigit']  ">
+                    {{RegistrationForm.controls['psw'].errors?.['noDigit'].message}} 
+               </div>
+               <div class="alert alert-danger" *ngIf="RegistrationForm.controls['psw'].errors?.['noSplC']  ">
+                {{RegistrationForm.controls['psw'].errors?.['noSplC'].message}} 
+           </div>
+               
             </div>
         </div>
 
+        <div>
+        <label for="rps">Confirm Password:</label><br>
+        <input [class.isinvalid]="RegistrationForm.errors?.['misMatch']" type="password" id="rps" name="rps" formControlName="rpsw"><br><br>
+        <div [hidden]="RegistrationForm.controls['rpsw'].valid || RegistrationForm.controls['rpsw'].pristine  ">
+            <div class="alert alert-danger" *ngIf="RegistrationForm.controls['rpsw'].errors?.['required']">
+            Confirm Password should be entered
+            </div>
+            <div class="alert alert-danger" *ngIf="RegistrationForm.controls['rpsw'].errors?.['misMatch']  ">
+                Mismatch
+            </div>
+            
+       
+    </div>
+           
+        </div>
 
-        <label for="rps">Password:</label><br>
-        <input type="password" id="rps" name="rps" formControlName="rpsw"><br><br>
-
+        <div>
         <label for="num">Mobile No:</label><br>
         <input type="text" id="fname" name="fname" formControlName="num"><br><br>
+        <div [hidden]="RegistrationForm.controls['num'].valid || RegistrationForm.controls['num'].pristine  ">
+            <div class="alert alert-danger" *ngIf="RegistrationForm.controls['num'].errors?.['required']">
+                Number should be entered
+            </div>
+            <div class="alert alert-danger" *ngIf="RegistrationForm.controls['num'].errors?.['isC']">
+                Number should not be a charracter
+            </div>
+        </div>
+    </div>
 
         <button type="submit">Submit</button>
     </form>
 </div>
+
+<!-- <div>
+    <p>{{RegistrationForm.controls["name"].value}}</p>
+    <p>{{RegistrationForm.controls["uname"].value}}</p>
+    <p>{{RegistrationForm.controls["num"].value}}</p>
+    
+</div> -->
